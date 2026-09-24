@@ -27,6 +27,7 @@ A static web app of interactive physics simulations for tutoring the Alberta Phy
 - **⚠️ The owner may merge PRs mid-session. Re-check before EVERY push to an existing branch.** Commits pushed after the PR merged land on a dead branch.
   - Enforced by `.githooks/pre-push`. **A fresh clone must enable it: `git config core.hooksPath .githooks`** (`./bootstrap.sh` does). It fails OPEN, so it can never be the reason work goes unsaved. Escape hatch: `git push --no-verify`.
   - After any merge, confirm the work landed: `git merge-base --is-ancestor <sha> origin/main`.
+- **No scheduled PR check-ins** (owner, 2026-09-24): each one costs a full turn of usage. Subscribe to a PR's activity so CI failures and reviews still arrive, but never arm a `send_later` / trigger check-in for it.
 
 ## Code Style
 - **A decision that protects a number is a test first, prose second.** Write the guard, then the `DECISIONS.md` row cites its ID (`test_x` — the string that opens a `test(...)` title). A row with nothing to cite is tagged `[unverifiable]`. `scripts/check_decisions_log.py` gates new rows on the merge path.
