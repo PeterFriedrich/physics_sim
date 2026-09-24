@@ -37,6 +37,22 @@ export const sims = [
     concepts: ['2-D motion', 'vector components', 'range', 'time of flight'],
   },
   {
+    id: 'motiongraphs',
+    course: 'p20',
+    unit: 'A',
+    title: 'Motion Graphs',
+    summary: 'Watch the position–time, velocity–time and acceleration–time graphs draw themselves as an object moves.',
+    concepts: ['slope of x–t is v', 'area under v–t is Δx', 'uniform acceleration'],
+  },
+  {
+    id: 'river',
+    course: 'p20',
+    unit: 'A',
+    title: 'Crossing a River',
+    summary: 'Steer a boat across a flowing river. Add the velocities tip to tail to find where it lands.',
+    concepts: ['vector addition', 'relative velocity', 'components'],
+  },
+  {
     id: 'incline',
     course: 'p20',
     unit: 'B',

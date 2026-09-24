@@ -21,7 +21,7 @@ export function turnaroundTime({ v0, a }) {
 // Path length, which exceeds |Δx| once the object has turned around.
 export function distanceTravelled(p, t) {
   const tr = turnaroundTime(p);
-  const x = (s) => uniformMotion({ x0: 0, ...p }, s).x;
+  const x = (s) => uniformMotion({ ...p, x0: 0 }, s).x;
   if (tr === null || tr >= t) return Math.abs(x(t));
   return Math.abs(x(tr)) + Math.abs(x(t) - x(tr));
 }

@@ -24,6 +24,8 @@ test('test_motion1d_distance_exceeds_displacement_after_turnaround', () => {
   // Out 4.0 m by t = 2 s, back 1.0 m by t = 3 s: distance 5.0 m, displacement 3.0 m.
   close(M.distanceTravelled(p, 3), 5);
   close(M.distanceTravelled(p, 1), 3);
+  // The starting position must not leak into a distance.
+  close(M.distanceTravelled({ x0: -8, ...p }, 3), 5);
   assert.equal(M.turnaroundTime({ v0: 4, a: 2 }), null);
   assert.equal(M.turnaroundTime({ v0: 4, a: 0 }), null);
 });
