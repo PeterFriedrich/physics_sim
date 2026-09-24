@@ -61,6 +61,22 @@ export const sims = [
     concepts: ['free-body diagrams', 'Newton’s second law', 'static vs kinetic friction'],
   },
   {
+    id: 'gravitation',
+    course: 'p20',
+    unit: 'B',
+    title: 'Universal Gravitation',
+    summary: 'The force between two masses, and how g weakens with height above Earth. Inverse square, drawn.',
+    concepts: ['Newton’s law of gravitation', 'inverse-square law', 'gravitational field strength'],
+  },
+  {
+    id: 'atwood',
+    course: 'p20',
+    unit: 'B',
+    title: 'Connected Masses',
+    summary: 'A mass on a table pulled by a hanging mass, or an Atwood machine. Find a and the tension.',
+    concepts: ['systems of objects', 'tension', 'Newton’s second law'],
+  },
+  {
     id: 'circular',
     course: 'p20',
     unit: 'C',
