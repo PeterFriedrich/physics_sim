@@ -6,7 +6,8 @@ A static web app of interactive physics simulations for tutoring the Alberta Phy
 ## Key Files
 - `TODO.md` — living backlog and **the source of truth for progress**. Read it first to know what to work on; update it in place as items open/close. Session summaries narrate *what happened*; TODO.md owns *what's left*. Never redo a closed item without asking — its `## Done` section lists every closed item in one line each. Conversely, an *open* item can be stale — reproduce the symptom before acting on it. **When an item closes, move its body to `docs/TODO_archive.md` and leave a `## Done` line** (`python3 tools/todo_archive.py` does it in bulk).
 - `docs/DECISIONS.md` — append-only index of locked decisions: one row + pointer to the doc holding the full reasoning. **Add a row whenever a decision locks.** Check it before re-opening anything that feels "already settled".
-- `docs/SPEC_phase1.md` — what phase 1 builds and its acceptance criteria. Read before adding or changing a sim.
+- `docs/SPEC_phase1.md` — phase 1 (one sim per unit) and the acceptance criteria every sim must meet. Read before adding or changing a sim.
+- `docs/SPEC_phase2.md` — phase 2: Physics 30 depth (fields, 2-D momentum).
 - `docs/ARCHITECTURE.md` — module contracts (physics / lib / sims / catalog) and the sim page contract. Read before a new module or a change to a shared helper.
 - `docs/TOKEN_EFFICIENCY.md` — context/token hygiene. Read before bulk-reading screenshots or summaries.
 - `docs/AUDIT_LEDGER.md` — coverage map of executed audit runs. **Add a row when an audit executes; check it before scoping a new one.**

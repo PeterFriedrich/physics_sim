@@ -11,8 +11,8 @@ hand calculation.
 | | B Dynamics | Forces on an incline (friction, free-body diagram) |
 | | C Circular Motion, Work, and Energy | Uniform circular motion ("cut the string") |
 | | D Oscillatory Motion and Mechanical Waves | Mass–spring SHM with energy bars; pulse superposition |
-| Physics 30 | A Momentum and Impulse | 1-D collisions (elastic / inelastic / stick) |
-| | B Forces and Fields | Charged particle in a magnetic field |
+| Physics 30 | A Momentum and Impulse | 1-D collisions (elastic / inelastic / stick); 2-D glancing collisions with vector diagrams |
+| | B Forces and Fields | Coulomb's law and electric fields (drag the charges); charge between parallel plates; charged particle in a magnetic field |
 | | C Electromagnetic Radiation | Refraction and Snell's law; photoelectric effect |
 | | D Atomic Physics | Radioactive decay and half-life |
 
