@@ -1,0 +1,15 @@
+{
+  "name": "physics-sim",
+  "private": true,
+  "description": "Interactive Physics 20 and Physics 30 (Alberta) simulations for tutoring",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "serve": "node tools/serve.js",
+    "verify": "node tools/verify-sims.js",
+    "check": "node --test && python3 scripts/check_doc_citations.py && python3 scripts/check_decisions_log.py"
+  }
+}

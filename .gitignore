@@ -1,41 +1,23 @@
-# Prerequisites
-*.d
+# Node
+node_modules/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Local verification output (screenshots from tools/verify-sims.js)
+output/
 
-# Precompiled Headers
-*.gch
-*.pch
+# Python (guard scripts)
+__pycache__/
+*.py[cod]
+.venv/
 
-# Linker files
-*.ilk
+# Environment variables
+.env
+.env.*
 
-# Debugger Files
-*.pdb
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# debug information files
-*.dwo
+# Claude Code personal settings (per-machine permission grants)
+.claude/settings.local.json
