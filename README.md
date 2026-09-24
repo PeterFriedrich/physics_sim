@@ -18,6 +18,8 @@ hand calculation.
 
 Every page has a "Key equations" list and "Try this" predict-and-check prompts.
 
+**Live site:** https://peterfriedrich.github.io/physics_sim/
+
 ## Run it
 
 No install and no build step: plain HTML, CSS and ES modules.
@@ -42,8 +44,9 @@ VERIFY_WIDTHS=390,1280 VERIFY_THEME=dark npm run verify
 
 `.github/workflows/deploy.yml` builds `site/` with `tools/build-site.js`,
 which cache-busts every asset so visitors never get a half-old site, and
-publishes it to GitHub Pages on every push to `main` after re-running the tests. Enable it once: repository **Settings →
-Pages → Source: GitHub Actions**.
+publishes it to GitHub Pages on every push to `main` after re-running the tests
+(Pages source: **GitHub Actions**, already enabled). After a deploy, HTML can be
+up to 10 minutes stale; a hard refresh picks up the new version.
 
 ## Working on it
 

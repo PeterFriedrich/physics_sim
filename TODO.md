@@ -13,7 +13,6 @@ symptom before acting on it.
 ### Before tutoring with it
 
 - [ ] **Owner walkthrough of every sim against hand calculations.** SPEC_phase1.md §5 criterion 5: default settings for each sim, compute the readouts by hand with the data sheet, confirm they match. Done when each sim has a ✓ (or a bug filed) here.
-- [ ] **Enable GitHub Pages** (Settings → Pages → Source: GitHub Actions) so `deploy.yml` can publish. Done when the site URL loads and is in `README.md`.
 - [ ] **Map sims to program-of-studies outcomes.** Units are matched by title only; the specific outcome codes (e.g. which General/Specific Outcome each sim serves) should be checked against the Alberta Education programs of study before they are shown on the page.
 
 ### More simulations (one per bullet; propose each first — CLAUDE.md)
@@ -35,5 +34,6 @@ symptom before acting on it.
 
 Closed items moved out of `## Open work` live in **`docs/TODO_archive.md`** — one line each below, reasoning there.
 
+- [x] **Enable GitHub Pages** — CLOSED 2026-09-24 · `docs/TODO_archive.md`
 - [x] **Physics 30 A: 2-D collisions with vector momentum diagrams. `collisions2d` (SPEC_phase2.md).** · `docs/TODO_archive.md`
 - [x] **Physics 30 B: Coulomb's law and electric fields; charge between parallel plates. `coulomb`, `plates` (SPEC_phase2.md).** · `docs/TODO_archive.md`

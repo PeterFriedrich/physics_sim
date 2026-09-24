@@ -8,6 +8,9 @@ Items are verbatim as they were closed, newest-moved first in the order they app
 
 ---
 
+- [x] **Enable GitHub Pages** (Settings → Pages → Source: GitHub Actions) so `deploy.yml` can publish. Done when the site URL loads and is in `README.md`.
+  - Closed 2026-09-24: Pages enabled by the owner, deploy runs succeeded, owner confirmed the live site; URL added to `README.md`.
+
 - [x] Physics 30 A: 2-D collisions with vector momentum diagrams. `collisions2d` (SPEC_phase2.md).
 
 - [x] Physics 30 B: Coulomb's law and electric fields; charge between parallel plates. `coulomb`, `plates` (SPEC_phase2.md).
