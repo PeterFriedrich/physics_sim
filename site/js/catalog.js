@@ -85,6 +85,22 @@ export const sims = [
     concepts: ['centripetal acceleration', 'period and frequency', 'Newton’s first law'],
   },
   {
+    id: 'coaster',
+    course: 'p20',
+    unit: 'C',
+    title: 'Energy on a Track',
+    summary: 'Release a car on a roller-coaster track. Watch potential energy turn into kinetic energy, and friction turn both into heat.',
+    concepts: ['conservation of energy', 'work done by friction', 'kinetic and potential energy'],
+  },
+  {
+    id: 'orbits',
+    course: 'p20',
+    unit: 'C',
+    title: 'Satellite Orbits',
+    summary: 'Two satellites around Earth at altitudes you choose. Compare their speeds, periods and T²/r³.',
+    concepts: ['gravity as centripetal force', 'orbital speed and period', 'Kepler’s third law'],
+  },
+  {
     id: 'spring',
     course: 'p20',
     unit: 'D',
