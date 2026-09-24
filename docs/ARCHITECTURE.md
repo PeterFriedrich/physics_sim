@@ -78,8 +78,20 @@ Vector colours are shared across sims so students learn one code.
   locally before merging UI work (`npm run verify`). If UI regressions start
   slipping through, promote it to its own CI job rather than weakening it.
 - **Deploy (`.github/workflows/deploy.yml`)**: on push to `main`, re-runs the
-  unit tests and publishes `site/` to GitHub Pages. One-time setup: repository
-  Settings → Pages → Source: *GitHub Actions*.
+  unit tests, builds `site/` into `_site/` with `tools/build-site.js`, and
+  publishes that to GitHub Pages. One-time setup: repository Settings → Pages →
+  Source: *GitHub Actions*.
+- **Cache busting (`tools/build-site.js`)**: Pages lets browsers cache every
+  file for 10 minutes, so right after a deploy a fresh page could run against an
+  old `catalog.js` ("the new sim isn't there"). The build stamps the stylesheet
+  and entry scripts with `?v=<content hash>` and writes an import map into each
+  HTML page that sends every module, including the sim page's dynamic import,
+  to its hashed URL. Content hash rather than commit sha, so unchanged files
+  stay cached; the same approach as edmonton-tax-viz's `scripts/build_site.py`.
+  The HTML itself can't be stamped: a browser holding a stale page keeps its
+  old map until max-age runs out or a hard refresh. `site/` stays unbuilt for
+  local work (`npm run serve`); `npm run verify:built` checks the built output
+  and fails on any unversioned `.js`/`.css` request.
 - The workflow guards stay in Python (stdlib only, no `pip install`) as they
   came from the template; the one pytest file was ported to `node:test` so the
   repo has a single test runner.

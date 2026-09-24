@@ -47,4 +47,5 @@ A static web app of interactive physics simulations for tutoring the Alberta Phy
 
 ## Verification
 - `npm run check` — unit tests + doc-citation and decisions-log guards (what CI runs).
+- `npm run verify:built` — the deploy build (cache-busted `_site/`) in the browser; also fails on any unversioned `.js`/`.css` request. Run it after touching `tools/build-site.js` or the HTML shells.
 - `npm run verify` — every page in headless Chromium; fails on console errors, blank canvas, horizontal scroll. `VERIFY_WIDTHS=390,1280 VERIFY_THEME=dark` for phone and dark mode. Look at the screenshot of anything you changed — "no errors" is not "looks right".

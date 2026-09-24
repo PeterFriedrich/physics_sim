@@ -7,7 +7,10 @@
 // dependency-free (docs/DECISIONS.md). Run it before merging UI changes:
 //   npm run verify            # uses a globally installed `playwright`
 //   VERIFY_THEME=dark npm run verify
+//   VERIFY_ROOT=_site npm run verify   # the built site (tools/build-site.js):
+//                                      # also fails on any unversioned .js/.css request
 import { mkdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { createServer } from './serve.js';
 import { sims } from '../site/js/catalog.js';
@@ -27,7 +30,8 @@ const { chromium } = loadPlaywright();
 const theme = process.env.VERIFY_THEME === 'dark' ? 'dark' : 'light';
 const widths = (process.env.VERIFY_WIDTHS || '1280').split(',').map(Number);
 
-const server = createServer();
+const built = Boolean(process.env.VERIFY_ROOT);
+const server = built ? createServer(resolve(process.env.VERIFY_ROOT)) : createServer();
 await new Promise((r) => server.listen(0, r));
 const base = `http://localhost:${server.address().port}`;
 await mkdir('output', { recursive: true });
@@ -40,6 +44,14 @@ async function visit(path, name, width, { play }) {
   const errors = [];
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   page.on('pageerror', (e) => errors.push(String(e)));
+  // On the built site every asset must go out versioned, or a browser cache
+  // can serve it stale after a deploy.
+  if (built) {
+    page.on('request', (r) => {
+      const u = new URL(r.url());
+      if (/\.(js|css)$/.test(u.pathname) && !u.searchParams.has('v')) errors.push(`unversioned request: ${u.pathname}`);
+    });
+  }
   await page.goto(base + path);
   await page.waitForLoadState('networkidle');
   // A sim with nothing to animate may hide its transport bar, so wait for the

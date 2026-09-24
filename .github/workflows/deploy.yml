@@ -1,6 +1,6 @@
 name: Deploy site
 
-# Publishes site/ to GitHub Pages on every push to main. The unit tests run
+# Builds site/ into _site/ (cache-busted) and publishes it to GitHub Pages on every push to main. The unit tests run
 # again here: this gates the PUBLISH, tests.yml gates the CHANGE.
 # One-time setup: Settings → Pages → Source: GitHub Actions (docs/ARCHITECTURE.md §6).
 
@@ -31,11 +31,16 @@ jobs:
       - name: Run tests
         run: node --test tests/*.test.js
 
+      # Stamps every .js/.css URL with ?v=<content hash> (docs/ARCHITECTURE.md §6),
+      # so browsers never mix a fresh page with a cached old module.
+      - name: Build site
+        run: node tools/build-site.js --out _site
+
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: site
+          path: _site
 
   deploy:
     needs: build

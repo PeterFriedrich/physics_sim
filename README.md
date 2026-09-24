@@ -40,8 +40,9 @@ VERIFY_WIDTHS=390,1280 VERIFY_THEME=dark npm run verify
 
 ## Deploy
 
-`.github/workflows/deploy.yml` publishes `site/` to GitHub Pages on every push
-to `main`, after re-running the tests. Enable it once: repository **Settings →
+`.github/workflows/deploy.yml` builds `site/` with `tools/build-site.js`,
+which cache-busts every asset so visitors never get a half-old site, and
+publishes it to GitHub Pages on every push to `main` after re-running the tests. Enable it once: repository **Settings →
 Pages → Source: GitHub Actions**.
 
 ## Working on it
