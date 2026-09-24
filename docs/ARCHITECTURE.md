@@ -98,6 +98,12 @@ could mislead.
 - **Alpha particle mass** 6.65 × 10⁻²⁷ kg (≈ 4 u), not on the data sheet.
 - **Incline**: the block is released from rest, and μ<sub>k</sub> is clamped to
   μ<sub>s</sub> so a mis-set slider cannot make friction accelerate it uphill.
+- **2-D collisions** (`physics/momentum2d.js`): smooth, frictionless discs, so
+  the impulse acts only along the line of centres at contact; the target
+  starts at rest. "Perfectly inelastic" means the discs lock together, a
+  separate case from restitution e = 0 (which would still let them slide apart).
+- **Charges between plates**: gravity neglected (the page says so); fields
+  outside the plates are taken as zero.
 - **Arrow lengths** saturate (`lib/canvas.js` `vecLen`), so direction is exact
   and magnitude is only qualitative; the readouts carry the size. The incline's
   free-body diagram is the exception: its arrows are to scale with each other.
