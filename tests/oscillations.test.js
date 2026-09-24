@@ -32,3 +32,19 @@ test('test_spring_restoring_force_opposes_displacement', () => {
   close(st.F, -2);
   close(st.a, -2);
 });
+
+test('test_pendulum_period_independent_of_mass_and_amplitude', () => {
+  // L = 1.00 m on Earth: T = 2π√(L/g) = 2.01 s.
+  assert.equal(O.pendulumPeriod(1, g).toPrecision(3), '2.01');
+  const T = O.pendulumPeriod(1, g);
+  for (const m of [0.1, 5]) for (const th of [5, 15]) close(O.pendulumState({ L: 1, m, thetaMaxDeg: th, g }, T).thetaDeg, th, 1e-9);
+});
+
+test('test_pendulum_restoring_force_toward_lowest_point', () => {
+  const s = O.pendulumState({ L: 2, m: 0.5, thetaMaxDeg: 10, g }, 0);
+  close(s.Frestore, -0.5 * g * Math.sin((10 * Math.PI) / 180));
+  close(s.h, 2 * (1 - Math.cos((10 * Math.PI) / 180)));
+  const q = O.pendulumState({ L: 2, m: 0.5, thetaMaxDeg: 10, g }, O.pendulumPeriod(2, g) / 4);
+  close(q.thetaDeg, 0, 1e-9);
+  close(q.Frestore, 0, 1e-9);
+});
