@@ -1,4 +1,4 @@
-import { inclineForces, criticalAngleDeg } from '../physics/dynamics.js';
+import { inclineForces, criticalAngleDeg, slideFromRest, timeToSlide } from '../physics/dynamics.js';
 import { g } from '../physics/constants.js';
 import { fitCanvas, makeView, theme, clear, arrow, line, text, subText } from '../lib/canvas.js';
 import { section, slider, toggle, readouts } from '../lib/controls.js';
@@ -68,14 +68,11 @@ export function mount(ui) {
     let s = S0;
     let v = 0;
     if (f.slides) {
-      s = S0 + 0.5 * f.a * clk.t * clk.t;
-      v = f.a * clk.t;
-      if (s >= sEnd) {
-        clk.t = Math.sqrt((2 * (sEnd - S0)) / f.a);
-        s = sEnd;
-        v = f.a * clk.t;
-        if (clk.running) clk.pause();
-      }
+      clk.t = Math.min(clk.t, timeToSlide(f.a, sEnd - S0));
+      const m = slideFromRest(f.a, clk.t);
+      s = S0 + m.d;
+      v = m.v;
+      if (s >= sEnd - 1e-9 && clk.running) clk.pause();
     }
 
     // Ramp: top at (0, L sin θ), foot at (L cos θ, 0). Down-slope unit u, outward normal n.

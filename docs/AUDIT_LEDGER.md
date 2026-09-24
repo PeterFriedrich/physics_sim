@@ -21,4 +21,7 @@ top-down, fundamental decisions first.
 
 ## Never audited (candidates, roughly ranked)
 
-- <the data join / the denominator / the published headline number …>
+- Readouts vs hand calculations for every sim at default settings (SPEC_phase1.md §5) — the headline promise of the site.
+- Sign conventions: hand rules and B-field direction in `magnetic`, momentum signs in `collisions`.
+- The teaching models (ARCHITECTURE.md §7): does any of them teach something false at the edges of its sliders?
+- Accessibility: keyboard use of every control, colour-only encodings on canvas.

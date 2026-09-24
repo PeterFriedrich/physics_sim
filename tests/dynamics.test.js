@@ -38,3 +38,12 @@ test('test_incline_critical_angle_is_arctan_mu_s', () => {
   assert.equal(inclineForces({ m: 1, angleDeg: theta - 0.01, muS: 0.6, muK: 0.4, g }).slides, false);
   assert.equal(inclineForces({ m: 1, angleDeg: theta + 0.01, muS: 0.6, muK: 0.4, g }).slides, true);
 });
+
+test('test_incline_slide_from_rest_kinematics', async () => {
+  const { slideFromRest, timeToSlide } = await import('../site/js/physics/dynamics.js');
+  const s = slideFromRest(2, 3);
+  close(s.d, 9);
+  close(s.v, 6);
+  close(timeToSlide(2, 9), 3);
+  assert.equal(timeToSlide(0, 1), Infinity);
+});

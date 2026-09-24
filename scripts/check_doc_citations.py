@@ -22,8 +22,8 @@ lands on some other real content rather than erroring. Cite ``§N`` or a section
 title instead.
 
 ⚠️ **BOTH SPELLINGS, and the second one is the one that matters.** The first cut
-of this guard required the literal word "line", so it caught "DATA.md line ~308"
-and missed "DATA.md:207" — which is the form the terminal renders as a clickable
+of this guard required the literal word "line", so it caught "SPEC_phase1.md line ~308"
+and missed "SPEC_phase1.md:207" — which is the form the terminal renders as a clickable
 link, so it is what anyone actually types. Two such citations sat unflagged in
 ``TODO.md`` from the day this guard shipped until 2026-08-09, both pointing at a
 line that had since become the *correction* of the claim citing it: plausible,
@@ -76,7 +76,7 @@ EXCLUDE_PARTS = (
     # lists them, so OUR citations TO such a file resolve.
     "docs/external",
 )
-EXCLUDE_NAMES = ("TODO_archive.md", "AUDIT_LEDGER.md", "CODEMAP.md")
+EXCLUDE_NAMES = ("TODO_archive.md", "AUDIT_LEDGER.md")
 
 # A bare basename this short collides with ordinary prose and data vocabulary
 # (`UI`, `API`), so citations to a doc this short must spell out the .md.

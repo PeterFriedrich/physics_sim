@@ -1,11 +1,11 @@
 ---
 name: project-audit
 description: >
-  Focused audit skill for this data-analysis project. Use this whenever the
-  user asks to audit, review, check, or QA the pipeline, a metric, or project
-  files. Picks ONE audit target per run; grounds in docs/AUDIT_LEDGER.md
+  Focused audit skill for this physics-simulation site. Use this whenever the
+  user asks to audit, review, check, or QA a simulation, a physics module, a
+  readout, or project files. Picks ONE audit target per run; grounds in docs/AUDIT_LEDGER.md
   before scoping and adds a ledger row after executing. Triggers on: "audit my
-  code", "check the pipeline", "review my project", "what should I look at",
+  code", "check this sim", "review my project", "what should I look at",
   "is this right", or any QA/review request in the context of this project.
 ---
 
@@ -54,11 +54,11 @@ shallow pass over everything.
 
 ### Step 3 — Choose the audit family
 
-**(a) Decision audit** (metrics, published claims — the default for anything
-user-facing): audit the **fundamental decisions top-down, highest level
+**(a) Decision audit** (what a sim teaches, a teaching model — the default for
+anything a student sees): audit the **fundamental decisions top-down, highest level
 first**, not the code.
 
-- Build the target's **decision stack** (L0 "should this be published at all"
+- Build the target's **decision stack** (L0 "does this sim teach the concept at all"
   → … → Ln "is the code right") and evaluate in order. **When a level is
   unsound, everything beneath it is moot** — don't polish an edge case under
   a broken unit-of-analysis choice.
@@ -77,7 +77,7 @@ first**, not the code.
 - For a substantial new target, **write the brief as a standalone
   `docs/AUDIT_<target>.md`** so the instrument outlives the run.
 
-**(b) Correctness audit** (silent-wrong-numbers risk): verdicts are **PASS /
+**(b) Correctness audit** (wrong-readout risk): verdicts are **PASS /
 FAIL / WARN** per target. The checklists are in the appendix below.
 
 ### Step 4 — Deliver verdicts
@@ -114,14 +114,14 @@ evidence-that-would-change-it. Correctness audits:
    locked or reopened.
 4. Update the ledger's "Never audited" list if your run covered (or
    surfaced) an inventory item.
-5. Ship as a PR like any other docs change (`git pull` master before cutting
+5. Ship as a PR like any other docs change (`git pull` main before cutting
    the branch — ledger/DECISIONS/TODO tails are append-conflict magnets).
 
 ## Escalation
 
-A FAIL on anything that makes published numbers wrong is **blocking** — stop
-auditing other targets in the same run; the numbers can't be trusted until it's
-fixed. An UNSOUND on a top decision level moots the rest of that stack: report
+A FAIL on anything that makes a readout wrong is **blocking** — stop
+auditing other targets in the same run; a student checking their work against it
+would be misled until it's fixed. An UNSOUND on a top decision level moots the rest of that stack: report
 it and stop descending. WARN/CONDITIONAL/architecture issues: list them, let
 the user decide order.
 
@@ -129,32 +129,33 @@ the user decide order.
 
 ## Appendix — correctness checklists (family b)
 
-### Units and reference systems
-The most dangerous silent failure: a computation in the wrong unit that
-produces plausible numbers with no error (degrees² for area, cents for
-dollars, fiscal for calendar year). Every conversion is explicit and asserted
-at the boundary. <For spatial work: `.to_crs()` before any `.area`; name the
-project's canonical EPSG here.>
+### Readouts vs hand calculation
+Pick the default settings and two slider extremes. Compute every readout by hand
+with the Alberta data sheet values; they must agree to the shown significant
+figures. A readout that is right at defaults and wrong at an extreme is the
+common failure.
 
-### Silent data drops
-Unmatched records are flagged, never silently dropped. Check: keys normalized
-before joins; explicit unmatched-row check after; counts + examples logged;
-before/after record counts visible so drift shows.
+### Units and sign conventions
+Every conversion (cm, nm, eV, mT, × 10⁶ m/s) happens once, at the display edge,
+and the label says the unit. Signs match the convention in the physics module's
+header comment. Directions students derive with a rule (hand rules, "toward the
+centre", "toward the normal") agree with what the canvas draws.
 
-### Guards measure data, not metadata
-A guard that reads a "last updated" string or a coverage label stays green
-while the data underneath moves. Check the numbers themselves — row counts,
-max dates, totals.
+### Readouts trace to tested physics
+Each number on screen comes from a function in `site/js/physics/` that a test
+exercises (docs/DECISIONS.md, the "every on-screen number" row). A formula
+written inline in a sim module is a finding even when it is right.
 
-### Module independence
-Each `src/` module runnable standalone: own/argued paths, no top-level state
-imports from sibling modules, existence checks on upstream outputs, traceable
-raw → joined → calculated → output flow.
+### Rendering tells the truth
+Arrows point the right way at every slider setting; saturating lengths are not
+presented as to-scale; axes and scale bars are labelled; nothing draws off
+canvas at phone width (`VERIFY_WIDTHS=390`).
 
-### Methodology
-Aggregations are the right kind (sum vs mean), exclusions documented and
-intentional, denominator source stated.
+### Teaching models at their edges
+For each simplification in ARCHITECTURE.md §7, push the sliders to their limits
+and ask whether the sim now shows something physically false. State the limit
+or clamp the slider.
 
-### DATA.md currency
-Column names, row counts, quirks, join match rates, exclusions — all matching
-reality. A stale DATA.md means knowledge is leaking between sessions; flag it.
+### Docs currency
+SPEC, ARCHITECTURE and the catalog agree with what ships: every sim listed,
+every contract field documented, every DECISIONS row still true.

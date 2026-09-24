@@ -12,11 +12,10 @@ prints it) before optimizing anything else.
 
 ## Rules
 
-1. **Never `Read` raw data files.** A single GeoJSON can be millions of tokens —
-   one raw read blows the entire context window. Always inspect via a small
-   python snippet that prints a *summary* (shape, columns, `head`, value counts,
-   a few rows) — never the raw bytes. Large generated JSON under `web/` is the
-   same hazard in a different extension.
+1. **Screenshots are the big-ticket reads here.** Each image from
+   `tools/verify-sims.js` costs far more than the code that drew it. Open only
+   the sims you changed, at the width that matters; rely on the tool's
+   pass/fail line for the rest. It screenshots just the sim area, not the page.
 
 2. **Read only the latest session summary.** Start work from the newest handoff.
    Do NOT bulk-read or glob-grep across the whole directory. Keep the **3 most
@@ -28,8 +27,8 @@ prints it) before optimizing anything else.
    `Read` with `offset`/`limit`, or `grep` to locate the lines first, when a
    file is more than a couple hundred lines.
 
-4. **Keep modules small and single-purpose.** One processing step per file,
-   ≤~250 lines. If a module crosses ~400 lines, that's the signal to split.
+4. **Keep modules small and single-purpose.** One topic per physics file, one
+   sim per sim file, ≤~250 lines. Crossing ~400 lines is the signal to split.
 
 5. **⚠️ MANY SMALL READS ARE THE EXPENSIVE PATTERN, not one big one.** Every
    tool result persists and is re-sent on every later turn, so 21 reads of
@@ -52,7 +51,7 @@ prints it) before optimizing anything else.
   (`tools/todo_archive.py`).
 - `docs/DECISIONS.md` — append-only; rows grow. Not on the loaded path, but
   grep it rather than reading it whole.
-- <add the project's own large files here as they appear>
+- `output/` — screenshots, gitignored; regenerate rather than read old ones.
 
 ## Going forward
 

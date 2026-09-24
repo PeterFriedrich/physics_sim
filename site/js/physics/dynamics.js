@@ -22,3 +22,13 @@ export function inclineForces({ m, angleDeg, muS, muK, g }) {
 export function criticalAngleDeg(muS) {
   return (Math.atan(muS) * 180) / Math.PI;
 }
+
+// Distance travelled down the slope and speed, starting from rest with constant a.
+export function slideFromRest(a, t) {
+  return { d: 0.5 * a * t * t, v: a * t };
+}
+
+// Time to slide distance d from rest; Infinity if the block does not move.
+export function timeToSlide(a, d) {
+  return a > 0 ? Math.sqrt((2 * d) / a) : Infinity;
+}
