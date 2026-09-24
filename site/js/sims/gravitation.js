@@ -1,5 +1,5 @@
 import { gravForce, earthFieldAtAltitude } from '../physics/gravitation.js';
-import { earthRadius, earthMass } from '../physics/constants.js';
+import { earthRadius, earthMassP20 } from '../physics/constants.js';
 import { fitCanvas, theme, clear, arrow, line, text, subText } from '../lib/canvas.js';
 import { section, slider, choice, readouts } from '../lib/controls.js';
 import { createClock } from '../lib/clock.js';
@@ -53,6 +53,10 @@ export function mount(ui) {
     { id: 'W', label: 'Weight F<sub>g</sub> = mg' },
   ]);
   const dls = ui.readouts.querySelectorAll('dl');
+  const note = document.createElement('p');
+  note.style.cssText = 'margin:8px 0 0;font-size:12px;color:var(--c-muted)';
+  note.textContent = 'Uses the Physics 20 sheet: M = 5.98 × 10²⁴ kg, R = 6.37 × 10⁶ m. GM/R² at the surface comes out 9.83 N/kg, a little above the rounded g = 9.81.';
+  ui.readouts.appendChild(note);
 
   const canvas = fitCanvas(ui.canvas);
   createClock(ui.transport, { frame: draw });
@@ -94,6 +98,7 @@ export function mount(ui) {
     earthBox.hidden = isPair;
     dls[0].hidden = !isPair;
     dls[1].hidden = isPair;
+    note.hidden = isPair;
     clear(ctx, w, h);
     const topH = h * 0.55;
     const G = { x: 56, y: topH + 16, w: w - 76, h: h - topH - 42 };
@@ -171,6 +176,6 @@ export function mount(ui) {
     outEarth.set('rRE', fmt(rNow / earthRadius));
     outEarth.set('g', `${fmt(g)} N/kg`);
     outEarth.set('ratio', fmt(g / g0));
-    outEarth.set('W', `${fmt(gravForce(m.value, earthMass, rNow))} N`);
+    outEarth.set('W', `${fmt(gravForce(m.value, earthMassP20, rNow))} N`);
   }
 }

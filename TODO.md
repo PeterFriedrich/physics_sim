@@ -17,9 +17,8 @@ symptom before acting on it.
 
 ### More simulations (one per bullet; propose each first — CLAUDE.md)
 
-- [ ] Physics 30 B: velocity selector / mass spectrometer; electromagnetic induction (magnet through a coil); electric potential and equipotentials.
-- [ ] Physics 30 C: double-slit interference and diffraction gratings; EM spectrum explorer.
-- [ ] Physics 30 D: Bohr model energy levels and line spectra; nuclear reactions and mass defect.
+- [ ] Physics 30 B: electromagnetic induction (magnet and coil), qualitative only. emf = BLv is not on the data sheet (DATA_SHEET.md §1.3), so the page shows Lenz's-law direction and no numeric emf.
+- [ ] Physics 30 D: photon momentum and Compton scattering (p = h/λ, Δλ = (h/mc)(1 − cos θ) are on the sheet); quarks and the first-generation fermion table.
 
 ### Tooling
 
@@ -28,6 +27,8 @@ symptom before acting on it.
 ## Done
 
 Closed items moved out of `## Open work` live in **`docs/TODO_archive.md`** — one line each below, reasoning there.
+
+- [x] **Physics 30 phase 4: `massspec`, `potential`, `wireforce`, `doubleslit`, `emspectrum`, `energylevels`, `reactions` (SPEC_phase4.md).** · `docs/TODO_archive.md`
 
 - [x] **Physics 20 A: motion graphs and river crossing. `motiongraphs`, `river` (SPEC_phase3.md).** · `docs/TODO_archive.md`
 - [x] **Physics 20 B: universal gravitation and g at altitude; connected masses. `gravitation`, `atwood` (SPEC_phase3.md).** · `docs/TODO_archive.md`

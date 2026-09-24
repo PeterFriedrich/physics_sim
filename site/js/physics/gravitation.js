@@ -1,6 +1,7 @@
 // Newton's law of universal gravitation and circular orbits (Physics 20
 // Units B and C). r is centre to centre, in metres.
-import { G, earthMass, earthRadius } from './constants.js';
+// Physics 20 only, so Earth's mass is the Physics 20 sheet's 5.98 × 10²⁴ kg.
+import { G, earthMassP20, earthRadius } from './constants.js';
 
 export function gravForce(m1, m2, r) {
   return (G * m1 * m2) / (r * r);
@@ -12,7 +13,7 @@ export function gravField(M, r) {
 }
 
 export function earthFieldAtAltitude(h) {
-  return gravField(earthMass, earthRadius + h);
+  return gravField(earthMassP20, earthRadius + h);
 }
 
 // Circular orbit of radius r around mass M: gravity provides F_c.

@@ -1,5 +1,5 @@
 import { circularOrbit, orbitRadiusForPeriod } from '../physics/gravitation.js';
-import { earthMass, earthRadius } from '../physics/constants.js';
+import { earthMassP20, earthRadius } from '../physics/constants.js';
 import { fitCanvas, makeView, theme, clear, arrow, text, subText } from '../lib/canvas.js';
 import { section, slider, buttons, readouts } from '../lib/controls.js';
 import { createClock } from '../lib/clock.js';
@@ -36,7 +36,7 @@ export function mount(ui) {
     {
       label: 'Make B geostationary (T = 24.0 h)',
       onClick: () => {
-        hB.value = Math.round((orbitRadiusForPeriod(earthMass, 86400) - earthRadius) / 1e4) * 10;
+        hB.value = Math.round((orbitRadiusForPeriod(earthMassP20, 86400) - earthRadius) / 1e4) * 10;
       },
     },
   ]);
@@ -83,7 +83,7 @@ export function mount(ui) {
     ];
     for (const [name, hk, col] of sats) {
       const r = earthRadius + hk * 1000;
-      const o = circularOrbit(earthMass, r);
+      const o = circularOrbit(earthMassP20, r);
       const ang = (2 * Math.PI * tSim) / o.T;
       ctx.strokeStyle = col;
       ctx.lineWidth = 1.5;

@@ -8,6 +8,8 @@ Items are verbatim as they were closed, newest-moved first in the order they app
 
 ---
 
+- [x] Physics 30 phase 4: `massspec`, `potential`, `wireforce`, `doubleslit`, `emspectrum`, `energylevels`, `reactions` (SPEC_phase4.md).
+
 - [x] **Physics 20 A: motion graphs and river crossing. `motiongraphs`, `river` (SPEC_phase3.md).** Slider-driven rather than a dragged object, so the readouts are exact.
 
 - [x] **Physics 20 B: universal gravitation and g at altitude; connected masses. `gravitation`, `atwood` (SPEC_phase3.md).**
