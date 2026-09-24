@@ -1,6 +1,9 @@
 # Node
 node_modules/
 
+# Built site (tools/build-site.js), published by deploy.yml
+_site/
+
 # Local verification output (screenshots from tools/verify-sims.js)
 output/
 
