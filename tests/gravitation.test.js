@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as Gr from '../site/js/physics/gravitation.js';
-import { G, earthMass, earthRadius } from '../site/js/physics/constants.js';
+import { G, earthMassP20 as earthMass, earthRadius } from '../site/js/physics/constants.js';
 
 const close = (a, b, tol = 1e-9) => assert.ok(Math.abs(a - b) <= tol * Math.max(1, Math.abs(b)), `${a} ≠ ${b}`);
 
@@ -12,9 +12,10 @@ test('test_gravitation_force_between_two_people', () => {
   close(Gr.gravForce(5, 8, 4), Gr.gravForce(5, 8, 2) / 4);
 });
 
-test('test_gravitation_surface_field_rounds_to_data_sheet_g', () => {
-  // GM/R² with data sheet values is 9.813…, which a student writes as 9.81 N/kg.
-  assert.equal(Gr.earthFieldAtAltitude(0).toPrecision(3), '9.81');
+test('test_gravitation_surface_field_from_physics_20_sheet', () => {
+  // GM/R² with the Physics 20 sheet's 5.98 × 10²⁴ kg is 9.83 N/kg, not the
+  // printed g = 9.81: what a student gets by hand from that sheet.
+  assert.equal(Gr.earthFieldAtAltitude(0).toPrecision(3), '9.83');
   close(Gr.earthFieldAtAltitude(earthRadius), Gr.earthFieldAtAltitude(0) / 4);
 });
 
@@ -27,8 +28,9 @@ test('test_orbits_kepler_constant_same_for_every_radius', () => {
 });
 
 test('test_orbits_geostationary_radius', () => {
-  // T = 24.0 h gives r = 4.22 × 10⁷ m (about 35 800 km up).
+  // T = 24.0 h with the Physics 20 sheet's Earth mass gives r = 4.23 × 10⁷ m
+  // (about 35 900 km up; the Physics 30 value 5.97 × 10²⁴ kg would give 4.22).
   const r = Gr.orbitRadiusForPeriod(earthMass, 86400);
-  assert.equal(r.toPrecision(3), '4.22e+7');
+  assert.equal(r.toPrecision(3), '4.23e+7');
   close(Gr.circularOrbit(earthMass, r).T, 86400);
 });

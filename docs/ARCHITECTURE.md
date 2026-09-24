@@ -110,7 +110,7 @@ could mislead.
   is not a device model.
 - **Work functions** are typical textbook values; sources differ in the second
   decimal, so the slider lets a tutor match their textbook.
-- **Alpha particle mass** 6.65 × 10⁻²⁷ kg (≈ 4 u), not on the data sheet.
+- **Alpha particle mass** 6.65 × 10⁻²⁷ kg is on the Physics 30 data sheet (DATA_SHEET.md §1.2).
 - **Incline**: the block is released from rest, and μ<sub>k</sub> is clamped to
   μ<sub>s</sub> so a mis-set slider cannot make friction accelerate it uphill.
 - **2-D collisions** (`physics/momentum2d.js`): smooth, frictionless discs, so

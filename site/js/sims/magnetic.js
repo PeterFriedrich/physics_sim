@@ -1,5 +1,5 @@
 import * as F from '../physics/fields.js';
-import { e, mp, me } from '../physics/constants.js';
+import { e, mp, me, alphaMass } from '../physics/constants.js';
 import { fitCanvas, makeView, theme, clear, arrow, line, text, niceStep } from '../lib/canvas.js';
 import { section, slider, choice, readouts } from '../lib/controls.js';
 import { createClock } from '../lib/clock.js';
@@ -29,7 +29,7 @@ export const legend = [
 const PARTICLES = [
   { value: 'proton', label: 'Proton (+e)', q: e, m: mp },
   { value: 'electron', label: 'Electron (−e)', q: -e, m: me },
-  { value: 'alpha', label: 'Alpha particle (+2e)', q: 2 * e, m: 6.65e-27 },
+  { value: 'alpha', label: 'Alpha particle (+2e)', q: 2 * e, m: alphaMass },
 ];
 
 // Speeds and fields students meet, from tabletop electron beams to mass spectrometers.

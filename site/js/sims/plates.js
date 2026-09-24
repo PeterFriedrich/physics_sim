@@ -1,5 +1,5 @@
 import * as E from '../physics/electrostatics.js';
-import { e, mp, me } from '../physics/constants.js';
+import { e, mp, me, alphaMass } from '../physics/constants.js';
 import { fitCanvas, makeView, theme, clear, arrow, line, text } from '../lib/canvas.js';
 import { section, slider, choice, readouts } from '../lib/controls.js';
 import { createClock } from '../lib/clock.js';
@@ -30,7 +30,7 @@ export const legend = [
 const PARTICLES = [
   { value: 'electron', label: 'Electron (−e)', q: -e, m: me, vUnit: 1e7, vLabel: '× 10⁷ m/s', v: [0.5, 5, 0.1, 2] },
   { value: 'proton', label: 'Proton (+e)', q: e, m: mp, vUnit: 1e5, vLabel: '× 10⁵ m/s', v: [0.5, 5, 0.1, 5] },
-  { value: 'alpha', label: 'Alpha particle (+2e)', q: 2 * e, m: 6.65e-27, vUnit: 1e5, vLabel: '× 10⁵ m/s', v: [0.5, 5, 0.1, 4] },
+  { value: 'alpha', label: 'Alpha particle (+2e)', q: 2 * e, m: alphaMass, vUnit: 1e5, vLabel: '× 10⁵ m/s', v: [0.5, 5, 0.1, 4] },
 ];
 
 const BOX = { xMin: -0.035, xMax: 0.24, yMin: -0.062, yMax: 0.062 };

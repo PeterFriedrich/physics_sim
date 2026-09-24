@@ -1,4 +1,5 @@
-// Values as printed on the Alberta Physics 20/30 data sheet, NOT CODATA.
+// Values as printed on the Alberta Physics 20/30 data sheets, NOT CODATA
+// (transcribed in docs/DATA_SHEET.md).
 // Students check sim readouts against hand calculations done with these, so a
 // more precise constant would make a correct student answer look wrong.
 // See docs/DECISIONS.md (constants row) and tests/constants.test.js.
@@ -14,5 +15,10 @@ export const eV = 1.6e-19; // J per electron volt
 export const me = 9.11e-31; // kg, electron mass
 export const mp = 1.67e-27; // kg, proton mass
 export const mn = 1.67e-27; // kg, neutron mass
-export const earthMass = 5.97e24; // kg
+export const alphaMass = 6.65e-27; // kg
+export const u = 1.66e-27; // kg, atomic mass unit
 export const earthRadius = 6.37e6; // m
+// The two courses' sheets disagree on Earth's mass. Each course's sims use
+// their own sheet so a student's hand calculation matches (DECISIONS.md).
+export const earthMass = 5.97e24; // kg, Physics 30 data sheet
+export const earthMassP20 = 5.98e24; // kg, Physics 20 formula sheet
