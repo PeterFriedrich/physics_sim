@@ -49,6 +49,18 @@ export function columnEnvelope(type, lambda, x) {
   return type === 'closed' ? Math.sin((2 * Math.PI * x) / lambda) : Math.cos((2 * Math.PI * x) / lambda);
 }
 
+// Displacement nodes and antinodes along the column, x from the left end
+// (the closed end, for a closed tube). Consecutive nodes are λ/2 apart.
+export function nodesAndAntinodes(type, lambda, L) {
+  const eps = 1e-9 * L;
+  const from = (x0) => {
+    const xs = [];
+    for (let x = x0; x <= L + eps; x += lambda / 2) xs.push(Math.min(x, L));
+    return xs;
+  };
+  return type === 'closed' ? { nodes: from(0), antinodes: from(lambda / 4) } : { nodes: from(lambda / 4), antinodes: from(0) };
+}
+
 // Doppler effect for a moving source and a stationary listener:
 // f = f_s · v / (v ∓ v_s), minus in front of the source, plus behind it.
 export function dopplerSource({ fs, v, vs }) {

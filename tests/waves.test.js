@@ -60,6 +60,17 @@ test('test_air_column_node_at_closed_end_antinode_at_open_end', () => {
   }
 });
 
+test('test_air_column_nodes_and_antinodes_positions', () => {
+  // Closed tube at its 2nd resonance, L = 3λ/4 with λ = 1.00 m.
+  const c = W.nodesAndAntinodes('closed', 1, 0.75);
+  assert.deepEqual(c.nodes, [0, 0.5]);
+  assert.deepEqual(c.antinodes, [0.25, 0.75]);
+  // Open tube at its 1st resonance, L = λ/2: antinodes at both ends, one node in the middle.
+  const o = W.nodesAndAntinodes('open', 1, 0.5);
+  assert.deepEqual(o.nodes, [0.25]);
+  assert.deepEqual(o.antinodes, [0, 0.5]);
+});
+
 test('test_doppler_moving_source', () => {
   // 500 Hz source at 30.0 m/s, v = 343 m/s: 548 Hz ahead, 460 Hz behind.
   const d = W.dopplerSource({ fs: 500, v: 343, vs: 30 });
