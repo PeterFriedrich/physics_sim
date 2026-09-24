@@ -21,3 +21,15 @@ export function potentialAt(y, d, dV) {
 export function speedAfter(q, m, dV, d, s) {
   return speedFromRest(q, m, (dV * s) / d);
 }
+
+// Time to cross the gap from rest under constant acceleration a = |q|E/m.
+export function crossingTime(q, m, dV, d) {
+  const a = (Math.abs(q) * Math.abs(dV)) / (d * m);
+  return Math.sqrt((2 * d) / a);
+}
+
+// Distance covered after time t from rest (for drawing the motion).
+export function distanceAt(q, m, dV, d, t) {
+  const a = (Math.abs(q) * Math.abs(dV)) / (d * m);
+  return Math.min(d, 0.5 * a * t * t);
+}

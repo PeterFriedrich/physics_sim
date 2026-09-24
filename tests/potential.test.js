@@ -26,3 +26,12 @@ test('test_potential_uniform_field_between_plates', () => {
   close(P.potentialAt(0.02, 0.05, 300), 120);
   close(P.speedAfter(-e, me, 300, 0.05, 0.05), P.speedFromRest(-e, me, 300));
 });
+
+test('test_potential_crossing_time_matches_kinematics', () => {
+  // Average speed from rest is v/2, so t = 2d/v.
+  const t = P.crossingTime(-e, me, 250, 0.04);
+  const v = P.speedFromRest(-e, me, 250);
+  close(t, (2 * 0.04) / v);
+  close(P.distanceAt(-e, me, 250, 0.04, t), 0.04);
+  close(P.distanceAt(-e, me, 250, 0.04, t / 2), 0.01);
+});

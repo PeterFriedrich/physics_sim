@@ -216,3 +216,7 @@ select {
 .site-footer { border-top: 1px solid var(--c-border); color: var(--c-muted); font-size: 13px; padding: 18px 0 28px; }
 
 .error { padding: 24px; background: var(--c-surface); border: 1px solid var(--c-friction); border-radius: var(--radius); }
+
+/* Nuclide notation: mass number over atomic number, left of the symbol. */
+.nuc { white-space: nowrap; }
+.nuc .az { display: inline-flex; flex-direction: column; font-size: 0.58em; line-height: 1.05; text-align: right; vertical-align: middle; margin-right: 1px; }
