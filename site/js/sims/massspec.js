@@ -63,7 +63,7 @@ export function mount(ui) {
     { id: 'x2', label: 'Lands at 2r (ion 2)' },
     { id: 'gap', label: 'Separation of marks' },
   ]);
-  ui.readouts.insertAdjacentHTML('beforeend', '<p style="margin:8px 0 0;font-size:12px;color:var(--c-muted)">Ion masses are mass number × u (u = 1.66 × 10⁻²⁷ kg), as Diploma questions give them. Ions enter the selector with a spread of speeds; only v = E/B₁ goes straight through the exit slit.</p>');
+  ui.readouts.insertAdjacentHTML('beforeend', '<p style="margin:8px 0 0;font-size:12px;color:var(--c-muted)">Ion masses are mass number × u (u = 1.66 × 10⁻²⁷ kg), as Diploma questions give them. Ions enter the selector with speeds spread ±15 % around the source setting; only v = E/B₁ goes straight through the exit slit.</p>');
 
   const canvas = fitCanvas(ui.canvas);
   let flying = [];
@@ -91,10 +91,11 @@ export function mount(ui) {
     const scale = L / (vSel || 2e5) / 1.5;
     if (dt > 0) {
       spawn += dt;
-      while (spawn > 0.18) {
-        spawn -= 0.18;
+      while (spawn > 0.07) {
+        spawn -= 0.07;
         const kind = kinds[Math.floor(rand() * kinds.length)];
-        const v = vSrc.value * 1e5 * (0.5 + rand());
+        // ±15 % spread: wide enough that most ions hit a plate, narrow enough that some pass.
+        const v = vSrc.value * 1e5 * (0.85 + 0.3 * rand());
         const path = M.selectorExit({ q: kind.q, m: kind.m, v, E, B1: B1.value, L, d: dm, slitHalf: SLIT });
         flying.push({ kind, v, path, t: 0 });
       }
@@ -154,10 +155,18 @@ export function mount(ui) {
       arrow(ctx, cx, cy, 0, -30, { color: th.velocity, width: 2.5, label: 'F_m' });
     }
 
-    // Landed marks.
+    // Landed marks, and where r = mv/(qB₂) predicts each ion lands.
     for (const mk of marks) {
       ctx.fillStyle = th.friction;
-      ctx.fillRect(bx0 - 6, view.py(mk.y) - 1.5, 6, 3);
+      ctx.fillRect(bx0 - 10, view.py(mk.y) - 2, 10, 4);
+    }
+    if (vSel > 0) {
+      for (const k of kinds) {
+        const yl = -M.landingDistance(k.m, vSel, k.q, B2.value);
+        if (yl < yMin) continue;
+        line(ctx, bx0 - 26, view.py(yl), bx0 - 12, view.py(yl), { color: th.muted, width: 1, dash: [3, 3] });
+        text(ctx, `${k.name} 2r = ${fmt(-yl * 100, 3)} cm`, bx0 - 30, view.py(yl), { color: th.ink, size: 12, align: 'right' });
+      }
     }
 
     // Ions in flight.

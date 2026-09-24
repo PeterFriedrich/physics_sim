@@ -7,6 +7,9 @@ import { createClock } from '../lib/clock.js';
 import { wavelengthToRgb } from '../lib/color.js';
 import { fmt } from '../lib/format.js';
 
+// The level diagram needs height more than width on phones.
+export const tallOnMobile = true;
+
 export const equations = [
   { html: 'ΔE = E<sub>upper</sub> − E<sub>lower</sub>', what: 'energy of the photon emitted or absorbed' },
   { html: 'E = hf = hc / λ', what: 'photon energy, frequency and wavelength' },
@@ -73,7 +76,7 @@ export function mount(ui) {
     const dx0 = 70;
     const dx1 = Math.min(w * 0.55, w - 200);
     const top = 34;
-    const bot = h - 40;
+    const bot = h - 70;
     const Y = (E) => top + ((0 - E) / 13.6) * (bot - top);
     line(ctx, dx0, Y(0), dx1, Y(0), { color: th.muted, width: 1, dash: [4, 4] });
     text(ctx, '0 eV (ionized)', dx1 + 6, Y(0), { color: th.muted, size: 11 });

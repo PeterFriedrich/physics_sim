@@ -139,7 +139,7 @@ export function mount(ui) {
         ctx.stroke();
       }
       ctx.restore();
-      text(ctx, Fz > 0 ? 'F out of the page' : 'F into the page', cx, cy - r - 14, { color: th.force, size: 13, weight: 700, align: 'center' });
+      text(ctx, Fz > 0 ? 'F out of the page' : 'F into the page', cx - r - 12, cy - r - 6, { color: th.force, size: 13, weight: 700, align: 'right' });
     } else {
       text(ctx, 'No force: the wire is parallel to B', cx, cy - 30, { color: th.force, size: 13, weight: 700, align: 'center' });
     }

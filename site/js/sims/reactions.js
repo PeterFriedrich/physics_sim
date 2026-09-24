@@ -49,13 +49,13 @@ export function mount(ui) {
 
   const eq = el('div', { class: 'decay-eq', style: 'font: 20px/1.4 "Cambria Math", Georgia, serif; padding: 4px 0 10px' }, ui.readouts);
   const out = readouts(ui.readouts, [
-    { id: 'Z', label: 'Charge (Z) left → right' },
-    { id: 'A', label: 'Nucleons (A) left → right' },
-    { id: 'masses', label: 'Atomic masses used' },
-    { id: 'dmU', label: 'Mass defect Δm' },
+    { id: 'Z', label: 'Charge Z: before → after' },
+    { id: 'A', label: 'Nucleons A: before → after' },
+    { id: 'masses', label: 'Masses used' },
+    { id: 'dmU', label: 'Δm' },
     { id: 'dmKg', label: 'Δm in kg' },
     { id: 'EJ', label: 'ΔE = Δmc²' },
-    { id: 'EMeV', label: 'ΔE in MeV' },
+    { id: 'EMeV', label: 'ΔE (MeV)' },
   ]);
   ui.readouts.insertAdjacentHTML('beforeend', '<p style="margin:8px 0 0;font-size:12px;color:var(--c-muted)">Atomic masses (u, including electrons) are given data from standard tables, as a Diploma question supplies them; they are not on the data sheet. * marks an excited nucleus.</p>');
 

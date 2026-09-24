@@ -12,9 +12,9 @@ hand calculation.
 | | C Circular Motion, Work, and Energy | Uniform circular motion ("cut the string"); energy on a roller-coaster track; satellite orbits and Kepler's third law |
 | | D Oscillatory Motion and Mechanical Waves | Mass–spring SHM with energy bars; simple pendulum; pulse superposition; resonance in air columns; Doppler effect |
 | Physics 30 | A Momentum and Impulse | 1-D collisions (elastic / inelastic / stick); 2-D glancing collisions with vector diagrams |
-| | B Forces and Fields | Coulomb's law and electric fields (drag the charges); charge between parallel plates; charged particle in a magnetic field |
-| | C Electromagnetic Radiation | Refraction and Snell's law; photoelectric effect |
-| | D Atomic Physics | Radioactive decay and half-life |
+| | B Forces and Fields | Coulomb's law and electric fields (drag the charges); charge between parallel plates; accelerating through a potential difference; charged particle in a magnetic field; mass spectrometer; current-carrying wire in a field |
+| | C Electromagnetic Radiation | Refraction and Snell's law; photoelectric effect; double slit and diffraction grating; the EM spectrum |
+| | D Atomic Physics | Radioactive decay and half-life; energy levels and line spectra; nuclear decay equations and mass defect |
 
 Every page has a "Key equations" list and "Try this" predict-and-check prompts.
 

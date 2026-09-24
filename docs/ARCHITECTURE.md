@@ -124,6 +124,7 @@ could mislead.
   F<sub>f</sub>d); small-angle pendulum capped at 15°; circular orbits around
   Earth only; Doppler for a moving source below the speed of sound; one μ for
   connected masses; speed of sound as a 343 m/s default slider.
+- **Phase 4 sims** (mass spectrometer, potential, interference, energy levels, EM spectrum, wire force, nuclear decay): SPEC_phase4.md §3. Energy levels and nuclide masses are *given* data, and λ = xd/(nl) is shown against the exact form.
 - **Arrow lengths** saturate (`lib/canvas.js` `vecLen`), so direction is exact
   and magnitude is only qualitative; the readouts carry the size. The incline's
   free-body diagram is the exception: its arrows are to scale with each other.
