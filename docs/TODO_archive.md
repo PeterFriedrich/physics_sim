@@ -8,6 +8,14 @@ Items are verbatim as they were closed, newest-moved first in the order they app
 
 ---
 
+- [x] **Physics 20 A: motion graphs and river crossing. `motiongraphs`, `river` (SPEC_phase3.md).** Slider-driven rather than a dragged object, so the readouts are exact.
+
+- [x] **Physics 20 B: universal gravitation and g at altitude; connected masses. `gravitation`, `atwood` (SPEC_phase3.md).**
+
+- [x] **Physics 20 C: energy on a track with friction; satellite orbits and Kepler's third law. `coaster`, `orbits` (SPEC_phase3.md).**
+
+- [x] **Physics 20 D: simple pendulum; resonance in air columns; Doppler effect. `pendulum`, `aircolumn`, `doppler` (SPEC_phase3.md).**
+
 - [x] **Enable GitHub Pages** (Settings → Pages → Source: GitHub Actions) so `deploy.yml` can publish. Done when the site URL loads and is in `README.md`.
   - Closed 2026-09-24: Pages enabled by the owner, deploy runs succeeded, owner confirmed the live site; URL added to `README.md`.
 

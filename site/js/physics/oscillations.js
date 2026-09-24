@@ -27,3 +27,18 @@ export function springState({ m, k, A }, t) {
 export function maxSpeed({ m, k, A }) {
   return A * Math.sqrt(k / m);
 }
+
+// Simple pendulum released from rest at θmax, small-angle closed form
+// θ = θmax·cos(ωt), ω = √(g/L). Accurate to better than 0.5 % in the period for
+// θmax ≤ 15°, which is why the sim caps the amplitude there. Angle positive to
+// the right of vertical.
+export function pendulumState({ L, m, thetaMaxDeg, g }, t) {
+  const th = ((thetaMaxDeg * Math.PI) / 180) * Math.cos(Math.sqrt(g / L) * t);
+  return {
+    thetaDeg: (th * 180) / Math.PI,
+    // Along the arc, toward the lowest point.
+    Frestore: -m * g * Math.sin(th),
+    x: L * Math.sin(th),
+    h: L * (1 - Math.cos(th)),
+  };
+}

@@ -58,9 +58,12 @@ Sims read control values each frame rather than keeping derived state, except
 where a change must restart the run (`onChange` → reset).
 
 Positions come from closed-form solutions of `t` wherever one exists
-(projectile, SHM, circular motion, charge in B field, collisions). Only the
-photoelectric electrons and the random decay step incrementally, and neither
-feeds a readout: the readouts use the closed forms.
+(projectile, SHM, pendulum, circular motion and orbits, charge in B field,
+collisions, connected masses). Only the photoelectric electrons, the random
+decay and the car on the roller-coaster track step incrementally. The first two
+feed no readout. The car's readouts come from the energy equation at its
+position and distance travelled (`physics/track.js` `energyAt`), which the
+step keeps exact by bisecting for each turning point.
 
 ## 5. Theming
 
@@ -116,6 +119,11 @@ could mislead.
   separate case from restitution e = 0 (which would still let them slide apart).
 - **Charges between plates**: gravity neglected (the page says so); fields
   outside the plates are taken as zero.
+- **Phase 3 (Physics 20)**, in full in SPEC_phase3.md §3: slider-driven
+  motion graphs; constant-force friction on the track (W<sub>f</sub> =
+  F<sub>f</sub>d); small-angle pendulum capped at 15°; circular orbits around
+  Earth only; Doppler for a moving source below the speed of sound; one μ for
+  connected masses; speed of sound as a 343 m/s default slider.
 - **Arrow lengths** saturate (`lib/canvas.js` `vecLen`), so direction is exact
   and magnitude is only qualitative; the readouts carry the size. The incline's
   free-body diagram is the exception: its arrows are to scale with each other.
