@@ -44,7 +44,13 @@ export function hadron(ids) {
 }
 
 // Proton rest energy from the sheet's mₚ: mc² in MeV (939 with sheet values).
+// The sheet gives mₙ = mₚ, so this serves the neutron too.
 export const protonMeV = (mp * c * c) / eV / 1e6;
+
+// Percentage of a nucleon's rest energy carried by its quarks' rest energies.
+export function quarkMassPercent(quarkMeV) {
+  return (100 * quarkMeV) / protonMeV;
+}
 
 // β decay at the quark level. Each particle is { symbol, thirds }.
 const E = (symbol, thirds) => ({ symbol, thirds });

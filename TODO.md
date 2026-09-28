@@ -17,8 +17,7 @@ symptom before acting on it.
 
 ### More simulations (one per bullet; propose each first — CLAUDE.md)
 
-- [ ] Physics 30 B: electromagnetic induction (magnet and coil), qualitative only. emf = BLv is not on the data sheet (DATA_SHEET.md §1.3), so the page shows Lenz's-law direction and no numeric emf.
-- [ ] Physics 30 D: photon momentum and Compton scattering (p = h/λ, Δλ = (h/mc)(1 − cos θ) are on the sheet); quarks and the first-generation fermion table.
+_None open: phase 5 built the last candidates._
 
 ### Tooling
 
@@ -27,6 +26,8 @@ symptom before acting on it.
 ## Done
 
 Closed items moved out of `## Open work` live in **`docs/TODO_archive.md`** — one line each below, reasoning there.
+
+- [x] **Physics 30 phase 5: `compton` (Unit C), `induction` (Unit B, Lenz's-law directions only), `particles` (Unit D, charge conservation only) (SPEC_phase5.md).** — BUILT 2026-09-28 · `docs/TODO_archive.md`
 
 - [x] **Physics 30 phase 4: `massspec`, `potential`, `wireforce`, `doubleslit`, `emspectrum`, `energylevels`, `reactions` (SPEC_phase4.md).** · `docs/TODO_archive.md`
 

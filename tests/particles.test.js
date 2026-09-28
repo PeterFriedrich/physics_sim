@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { hadron, protonMeV, BETA, chargeThirds } from '../site/js/physics/particles.js';
+import { hadron, protonMeV, BETA, chargeThirds, quarkMassPercent } from '../site/js/physics/particles.js';
 
 test('test_particles_nucleons_from_quarks', () => {
   assert.deepEqual(hadron(['u', 'u', 'd']), { thirds: 3, kind: 'baryon', name: 'proton (p)', quarkMeV: 9.6 });
@@ -32,6 +32,7 @@ test('test_particles_beta_decay_conserves_charge', () => {
 test('test_particles_quarks_are_a_percent_of_the_proton_mass', () => {
   // mₚc² = 1.67e-27 × (3.00e8)² / 1.60e-19 J/eV = 939 MeV with sheet values.
   assert.equal(protonMeV.toPrecision(3), '939');
-  const pct = (100 * hadron(['u', 'u', 'd']).quarkMeV) / protonMeV;
-  assert.equal(pct.toFixed(1), '1.0');
+  // uud: 9.6 / 939 = 1.0 %; udd: 12.0 / 939 = 1.3 %.
+  assert.equal(quarkMassPercent(hadron(['u', 'u', 'd']).quarkMeV).toFixed(1), '1.0');
+  assert.equal(quarkMassPercent(hadron(['u', 'd', 'd']).quarkMeV).toFixed(1), '1.3');
 });

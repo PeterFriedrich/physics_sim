@@ -205,6 +205,14 @@ export const sims = [
     concepts: ['motor effect', 'l⊥', 'hand rules'],
   },
   {
+    id: 'induction',
+    course: 'p30',
+    unit: 'B',
+    title: 'Electromagnetic Induction',
+    summary: 'Push a magnet into a coil and use Lenz’s law to find the induced current’s direction.',
+    concepts: ['Lenz’s law', 'changing flux', 'induced current'],
+  },
+  {
     id: 'refraction',
     course: 'p30',
     unit: 'C',
@@ -237,6 +245,14 @@ export const sims = [
     concepts: ['c = fλ', 'E = hf', 'EM bands'],
   },
   {
+    id: 'compton',
+    course: 'p30',
+    unit: 'C',
+    title: 'Compton Scattering',
+    summary: 'Bounce a photon off an electron and follow its momentum and energy: p = h/λ, Δλ = (h/mc)(1 − cos θ).',
+    concepts: ['photon momentum', 'Compton effect', 'conservation of momentum'],
+  },
+  {
     id: 'halflife',
     course: 'p30',
     unit: 'D',
@@ -251,6 +267,14 @@ export const sims = [
     title: 'Energy Levels and Line Spectra',
     summary: 'Drop an electron between hydrogen levels and find the photon it emits.',
     concepts: ['energy levels', 'ΔE = hf', 'Balmer series'],
+  },
+  {
+    id: 'particles',
+    course: 'p30',
+    unit: 'D',
+    title: 'Quarks and Fermions',
+    summary: 'Build protons, neutrons and pions from quarks, and follow the charge through beta decay.',
+    concepts: ['quarks', 'baryons and mesons', 'charge conservation'],
   },
   {
     id: 'reactions',

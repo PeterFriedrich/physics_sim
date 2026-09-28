@@ -8,6 +8,9 @@ Items are verbatim as they were closed, newest-moved first in the order they app
 
 ---
 
+- [x] **Physics 30 phase 5: `compton` (Unit C), `induction` (Unit B, Lenz's-law directions only), `particles` (Unit D, charge conservation only) (SPEC_phase5.md).** Built 2026-09-28; the owner put Compton in Unit C and limited the quark sim to charge. No candidates remain in this list.
+
+
 - [x] Physics 30 phase 4: `massspec`, `potential`, `wireforce`, `doubleslit`, `emspectrum`, `energylevels`, `reactions` (SPEC_phase4.md).
 
 - [x] **Physics 20 A: motion graphs and river crossing. `motiongraphs`, `river` (SPEC_phase3.md).** Slider-driven rather than a dragged object, so the readouts are exact.
