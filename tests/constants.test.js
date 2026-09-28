@@ -25,3 +25,10 @@ test('test_constants_earth_mass_per_course_sheet', () => {
   assert.equal(C.earthMass, 5.97e24);
   assert.equal(C.earthMassP20, 5.98e24);
 });
+
+test('test_constants_fermion_table_from_physics_30_sheet', () => {
+  // Printed as approximate rest energies: e ~0.511, u ~2.4, d ~4.8 MeV/c².
+  assert.equal(C.electronMeV, 0.511);
+  assert.equal(C.upQuarkMeV, 2.4);
+  assert.equal(C.downQuarkMeV, 4.8);
+});

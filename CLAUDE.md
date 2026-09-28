@@ -9,6 +9,7 @@ A static web app of interactive physics simulations for tutoring the Alberta Phy
 - `docs/SPEC_phase1.md` — phase 1 (one sim per unit) and the acceptance criteria every sim must meet. Read before adding or changing a sim.
 - `docs/SPEC_phase2.md` — phase 2: Physics 30 depth (fields, 2-D momentum).
 - `docs/SPEC_phase4.md` — phase 4: the rest of Physics 30.
+- `docs/SPEC_phase5.md` — phase 5: Compton scattering, qualitative induction, quarks.
 - `docs/DATA_SHEET.md` — both courses' data sheets, transcribed. **Check a constant or an "is it on the sheet?" question here first.**
 - `docs/ARCHITECTURE.md` — module contracts (physics / lib / sims / catalog) and the sim page contract. Read before a new module or a change to a shared helper.
 - `docs/TOKEN_EFFICIENCY.md` — context/token hygiene. Read before bulk-reading screenshots or summaries.
