@@ -22,3 +22,8 @@ export const earthRadius = 6.37e6; // m
 // their own sheet so a student's hand calculation matches (DECISIONS.md).
 export const earthMass = 5.97e24; // kg, Physics 30 data sheet
 export const earthMassP20 = 5.98e24; // kg, Physics 20 formula sheet
+// First-generation fermion table, Physics 30 data sheet (approximate rest
+// energies, MeV/c²).
+export const electronMeV = 0.511;
+export const upQuarkMeV = 2.4;
+export const downQuarkMeV = 4.8;
