@@ -62,11 +62,11 @@ function table(parent) {
 
 export function mount(ui) {
   const c1 = section(ui.controls, 'Cart 1 (left)');
-  const m1 = slider(c1, { label: 'Mass m<sub>1</sub>', min: 0.5, max: 5, step: 0.1, value: 2, unit: 'kg' });
-  const v1 = slider(c1, { label: 'Velocity v<sub>1</sub>', min: -4, max: 6, step: 0.1, value: 3, unit: 'm/s' });
+  const m1 = slider(c1, { label: 'Mass m<sub>1</sub>', min: 0.1, max: 10, step: 0.1, value: 2, unit: 'kg' });
+  const v1 = slider(c1, { label: 'Velocity v<sub>1</sub>', min: -10, max: 10, step: 0.1, value: 3, unit: 'm/s' });
   const c2 = section(ui.controls, 'Cart 2 (right)');
-  const m2 = slider(c2, { label: 'Mass m<sub>2</sub>', min: 0.5, max: 5, step: 0.1, value: 1, unit: 'kg' });
-  const v2 = slider(c2, { label: 'Velocity v<sub>2</sub>', min: -6, max: 4, step: 0.1, value: 0, unit: 'm/s' });
+  const m2 = slider(c2, { label: 'Mass m<sub>2</sub>', min: 0.1, max: 10, step: 0.1, value: 1, unit: 'kg' });
+  const v2 = slider(c2, { label: 'Velocity v<sub>2</sub>', min: -10, max: 10, step: 0.1, value: 0, unit: 'm/s' });
   const kind = section(ui.controls, 'Collision');
   const type = choice(kind, { label: 'Type', options: TYPES, value: 1 });
 
@@ -102,7 +102,8 @@ export function mount(ui) {
 
     const cart = (x, m, v, color, label) => {
       const cw = CW * view.sx;
-      const ch = cw * (0.35 + 0.12 * m);
+      // sqrt keeps a 10 kg cart on the canvas and a 0.1 kg cart visible.
+      const ch = cw * (0.3 + 0.2 * Math.sqrt(m));
       const left = view.px(x - CW / 2);
       const top = view.py(0) - ch - 8;
       ctx.fillStyle = color;
