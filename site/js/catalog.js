@@ -145,8 +145,8 @@ export const sims = [
     course: 'p30',
     unit: 'A',
     title: '1-D Collisions',
-    summary: 'Collide two carts. Momentum is always conserved; kinetic energy only sometimes.',
-    concepts: ['conservation of momentum', 'impulse', 'elastic vs inelastic'],
+    summary: 'Collide two carts, or push them apart in an explosion. Momentum is always conserved; kinetic energy only sometimes.',
+    concepts: ['conservation of momentum', 'impulse', 'elastic vs inelastic', 'explosions and recoil'],
   },
   {
     id: 'collisions2d',

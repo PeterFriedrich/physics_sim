@@ -1,4 +1,4 @@
-import { collide1D, momentum, kineticEnergy, collisionTime } from '../physics/momentum.js';
+import { collide1D, explode1D, momentum, kineticEnergy, collisionTime } from '../physics/momentum.js';
 import { fitCanvas, makeView, theme, clear, arrow, line, text, subText, vecLen, roundRect } from '../lib/canvas.js';
 import { section, slider, choice, el } from '../lib/controls.js';
 import { createClock } from '../lib/clock.js';
@@ -10,6 +10,7 @@ export const tallOnMobile = true;
 export const equations = [
   { html: 'p = mv', what: 'momentum is a vector: sign gives direction' },
   { html: 'm<sub>1</sub>v<sub>1</sub> + m<sub>2</sub>v<sub>2</sub> = m<sub>1</sub>v<sub>1</sub>′ + m<sub>2</sub>v<sub>2</sub>′', what: 'conservation of momentum' },
+  { html: '(m<sub>1</sub> + m<sub>2</sub>)v<sub>0</sub> = m<sub>1</sub>v<sub>1</sub>′ + m<sub>2</sub>v<sub>2</sub>′', what: 'explosion: both start together at v<sub>0</sub>' },
   { html: 'J = FΔt = Δp', what: 'impulse' },
   { html: 'E<sub>k</sub> = ½mv²', what: 'conserved only in elastic collisions' },
 ];
@@ -20,6 +21,7 @@ export const prompts = [
   'Make the collision perfectly inelastic. Where does the “lost” kinetic energy go?',
   'Equal masses, elastic, cart 2 at rest: what happens? Try a heavy cart hitting a light one, then the reverse.',
   'Watch the total-momentum bar during the collision. Does it ever change?',
+  'Choose Explosion: a 4.00 kg rifle fires a 10 g bullet at 400 m/s. Predict the recoil velocity, then play. Where does the kinetic energy come from?',
 ];
 
 export const legend = [
@@ -32,6 +34,7 @@ const TYPES = [
   { value: 1, label: 'Elastic (bounce, Ek conserved)' },
   { value: 0.5, label: 'Inelastic (some Ek lost)' },
   { value: 0, label: 'Perfectly inelastic (carts stick)' },
+  { value: 'explode', label: 'Explosion (gun and bullet)' },
 ];
 
 const TRACK = 8; // m
@@ -69,24 +72,51 @@ export function mount(ui) {
   const v2 = slider(c2, { label: 'Velocity v<sub>2</sub>', min: -10, max: 10, step: 0.1, value: 0, unit: 'm/s' });
   const kind = section(ui.controls, 'Collision');
   const type = choice(kind, { label: 'Type', options: TYPES, value: 1 });
+  const ex = section(ui.controls, 'Explosion (carts start together)');
+  const em1 = slider(ex, { label: 'Mass m<sub>1</sub> (left, e.g. gun)', min: 0.01, max: 10, step: 0.01, value: 4, unit: 'kg' });
+  const em2 = slider(ex, { label: 'Mass m<sub>2</sub> (right, e.g. bullet)', min: 0.01, max: 10, step: 0.01, value: 0.01, unit: 'kg' });
+  const ev0 = slider(ex, { label: 'Starting velocity v<sub>0</sub> (together)', min: -10, max: 10, step: 0.1, value: 0, unit: 'm/s' });
+  const ev2 = slider(ex, { label: 'Final velocity v<sub>2</sub>′', min: -500, max: 500, step: 0.1, value: 400, unit: 'm/s' });
+  const showMode = () => {
+    const explode = type.value === 'explode';
+    c1.hidden = c2.hidden = explode;
+    ex.hidden = !explode;
+  };
+  type.onChange(showMode);
+  showMode();
 
   const tab = table(ui.readouts);
   ui.readouts.insertAdjacentHTML('beforeend', '<p style="margin:4px 0 0;font-size:12px;color:var(--c-muted)">v in m/s, p in kg·m/s, E<sub>k</sub> in J; primes are after the collision. +x is to the right.</p>');
 
   const canvas = fitCanvas(ui.canvas);
   const clock = createClock(ui.transport, { frame: draw });
-  [m1, v1, m2, v2, type].forEach((c) => c.onChange(() => (clock.pause(), clock.reset())));
+  [m1, v1, m2, v2, type, em1, em2, ev0, ev2].forEach((c) => c.onChange(() => (clock.pause(), clock.reset())));
 
   function draw(clk) {
     const { ctx, w, h } = canvas;
     const th = theme();
-    const s = { m1: m1.value, v1: v1.value, m2: m2.value, v2: v2.value, e: type.value };
-    const x10 = 1.6;
-    const x20 = 5.2;
-    const tc = collisionTime({ gap: x20 - x10 - CW, v1: s.v1, v2: s.v2 });
-    const after = collide1D(s);
-    const hit = clk.t >= tc;
-    const pos = (x0, v, vf) => (hit ? x0 + v * tc + vf * (clk.t - tc) : x0 + v * clk.t);
+    const explode = type.value === 'explode';
+    let s, x10, x20, tc, after, k;
+    if (explode) {
+      s = { m1: em1.value, v1: ev0.value, m2: em2.value, v2: ev0.value };
+      after = explode1D({ m1: s.m1, m2: s.m2, v0: ev0.value, v2f: ev2.value });
+      // Slow motion so the fastest cart crosses the screen at about 4 m/s;
+      // the clock shows real time.
+      k = Math.min(1, 4 / Math.max(Math.abs(after.v1f), Math.abs(after.v2f), Math.abs(s.v1)));
+      x10 = TRACK / 2 - CW / 2;
+      x20 = TRACK / 2 + CW / 2;
+      tc = after.apart ? 0.5 * k : Infinity;
+    } else {
+      s = { m1: m1.value, v1: v1.value, m2: m2.value, v2: v2.value, e: type.value };
+      after = collide1D(s);
+      k = 1;
+      x10 = 1.6;
+      x20 = 5.2;
+      tc = collisionTime({ gap: x20 - x10 - CW, v1: s.v1, v2: s.v2 });
+    }
+    const t = clk.t * k;
+    const hit = t >= tc;
+    const pos = (x0, v, vf) => (hit ? x0 + v * tc + vf * (t - tc) : x0 + v * t);
     const x1 = pos(x10, s.v1, after.v1f);
     const x2 = pos(x20, s.v2, after.v2f);
     const u1 = hit ? after.v1f : s.v1;
@@ -100,7 +130,7 @@ export function mount(ui) {
     line(ctx, view.px(-0.4), view.py(0), view.px(TRACK + 0.4), view.py(0), { color: th.ink, width: 2 });
     for (let x = 0; x <= TRACK; x++) text(ctx, `${x}`, view.px(x), view.py(0) + 14, { color: th.muted, size: 11, align: 'center' });
 
-    const cart = (x, m, v, color, label) => {
+    const cart = (x, m, v, color, label, showV = true) => {
       const cw = CW * view.sx;
       // sqrt keeps a 10 kg cart on the canvas and a 0.1 kg cart visible.
       const ch = cw * (0.3 + 0.2 * Math.sqrt(m));
@@ -116,13 +146,17 @@ export function mount(ui) {
         ctx.fill();
       }
       if (cw > 48) text(ctx, label, left + cw / 2, top + ch / 2, { color: th.surface, size: 12, weight: 700, align: 'center' });
+      if (!showV) return;
       arrow(ctx, left + cw / 2, top - 18, vecLen(v, 3, 90), 0, { color: th.velocity, width: 2.5 });
       text(ctx, `${fmt(snap(v, 1), 3)} m/s`, left + cw / 2, top - 36, { color: th.velocity, size: 12, align: 'center' });
     };
     cart(x1, s.m1, u1, th.seriesA, `${fmt(s.m1, 2)} kg`);
-    cart(x2, s.m2, u2, th.seriesB, `${fmt(s.m2, 2)} kg`);
-    if (tc === Infinity) text(ctx, 'These carts never meet — cart 1 must be faster than cart 2.', 12, 18, { color: th.muted, size: 13 });
-    else if (hit) text(ctx, `Collision at t = ${fmt(tc)} s`, 12, 18, { color: th.muted, size: 13 });
+    // Together before the explosion: one shared velocity arrow, on cart 1.
+    cart(x2, s.m2, u2, th.seriesB, `${fmt(s.m2, 2)} kg`, !(explode && !hit));
+    const msg = (str) => text(ctx, str, 12, 18, { color: th.muted, size: 13 });
+    if (explode && tc === Infinity) msg('No explosion: need v₂′ ≥ v₀ to push apart.');
+    else if (tc === Infinity) msg('These carts never meet — cart 1 must be faster than cart 2.');
+    else if (hit) msg(`${explode ? 'Explosion' : 'Collision'} at t = ${fmt(tc)} s`);
 
     // Live bar charts: momentum (signed) and kinetic energy.
     const p1 = momentum(s.m1, u1);
@@ -130,7 +164,7 @@ export function mount(ui) {
     const k1 = kineticEnergy(s.m1, u1);
     const k2 = kineticEnergy(s.m2, u2);
     const pMax = Math.max(1e-6, Math.abs(momentum(s.m1, s.v1)) + Math.abs(momentum(s.m2, s.v2)), Math.abs(momentum(s.m1, after.v1f)) + Math.abs(momentum(s.m2, after.v2f)));
-    const kMax = Math.max(1e-6, kineticEnergy(s.m1, s.v1) + kineticEnergy(s.m2, s.v2));
+    const kMax = Math.max(1e-6, kineticEnergy(s.m1, s.v1) + kineticEnergy(s.m2, s.v2), kineticEnergy(s.m1, after.v1f) + kineticEnergy(s.m2, after.v2f));
     const panelY = trackH + 10;
     const panelH = (h - panelY - 12) / (narrow ? 2 : 1);
     const half = w / 2;
@@ -164,7 +198,8 @@ export function mount(ui) {
     tab.set(0, [f(s.v1), dash(after.v1f), f(pb1), dash(pa1), f(kb1), dash(ka1)]);
     tab.set(1, [f(s.v2), dash(after.v2f), f(pb2), dash(pa2), f(kb2), dash(ka2)]);
     tab.set(2, ['', '', f(pb1 + pb2), dash(pa1 + pa2), f(kb1 + kb2), dash(ka1 + ka2)]);
-    tab.note(never ? 'No collision.' : `Impulse on cart 1: J = Δp = <b>${f(pa1 - pb1)}</b> kg·m/s; on cart 2: <b>${f(pa2 - pb2)}</b> kg·m/s. ΔE<sub>k</sub> = ${f(ka1 + ka2 - kb1 - kb2)} J.`);
-    clk.setTimeLabel(`t = ${clk.t.toFixed(2)} s`);
+    const dE = `ΔE<sub>k</sub> = ${f(ka1 + ka2 - kb1 - kb2)} J${explode ? ', released by the explosion' : ''}.`;
+    tab.note(never ? (explode ? 'No explosion.' : 'No collision.') : `Impulse on cart 1: J = Δp = <b>${f(pa1 - pb1)}</b> kg·m/s; on cart 2: <b>${f(pa2 - pb2)}</b> kg·m/s. ${dE}`);
+    clk.setTimeLabel(k < 1 ? `t = ${t.toFixed(4)} s (${fmt(1 / k, 2)}× slow-mo)` : `t = ${t.toFixed(2)} s`);
   }
 }

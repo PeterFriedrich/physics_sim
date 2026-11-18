@@ -28,6 +28,13 @@ courses with at least one simulation.
 | Physics 30 | C Electromagnetic Radiation | Refraction and Snell's law (`refraction`), photoelectric effect (`photoelectric`) |
 | Physics 30 | D Atomic Physics | Radioactive decay and half-life (`halflife`) |
 
+The 1-D collisions sim also has an **explosion mode** (added 2026-11-18, owner's
+call): two carts start together at v₀ and are pushed apart. The student sets
+both masses and cart 2's final velocity, and momentum gives cart 1's recoil,
+the way textbook gun-and-bullet questions are posed. A cart 2 that ends slower
+than v₀ is refused, because the carts would pass through each other. Fast
+cases play in slow motion and the clock shows real time.
+
 Out of scope for phase 1: accounts, saved progress, a backend, worked-solution
 generation, and any claim of alignment to specific outcome codes (units are
 mapped by unit title only — see `TODO.md`).
