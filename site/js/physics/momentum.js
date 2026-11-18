@@ -20,3 +20,12 @@ export function collisionTime({ gap, v1, v2 }) {
   const closing = v1 - v2;
   return closing > 0 ? gap / closing : Infinity;
 }
+
+// Explosion / recoil: two objects moving together at v0 are pushed apart, and
+// cart 2's final velocity v2f is given (the bullet's muzzle velocity in a
+// gun-and-bullet question). Momentum fixes cart 1's recoil. `apart` is false
+// when v2f < v0, which would need the carts to pass through each other.
+export function explode1D({ m1, m2, v0, v2f }) {
+  const v1f = ((m1 + m2) * v0 - m2 * v2f) / m1;
+  return { v1f, v2f, apart: v2f >= v0 };
+}
